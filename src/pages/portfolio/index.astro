@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const posts = (await getCollection('portfolio')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Layout 
+	title="Portfolio" 
+	description="Explore our latest projects and work"
+>
+	<section class="py-16 sm:py-20">
+		<div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+			<div class="mb-12 sm:mb-16">
+				<h1 class="text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
+					Portfolio
+				</h1>
+				<p class="mt-4 text-lg text-primary-950/70 dark:text-primary-200/70">
+					Explore our latest projects and work
+				</p>
+			</div>
+			
+			<div class="grid gap-8 sm:gap-12 lg:grid-cols-2">
+				{
+					posts.map((post, index) => (
+						<article class={index === 0 ? 'lg:col-span-2' : ''}>
+							<a 
+								href={`/portfolio/${post.id}/`}
+								class="group block"
+							>
+								{post.data.heroImage && (
+									<div class="mb-4 overflow-hidden rounded-3xl">
+										<Image 
+											width={index === 0 ? 1280 : 720} 
+											height={index === 0 ? 640 : 360} 
+											src={post.data.heroImage} 
+											alt="" 
+											class="h-auto w-full transition duration-300 group-hover:scale-105"
+										/>
+									</div>
+								)}
+								<div class="flex flex-col gap-2">
+									<time class="text-sm text-primary-600 dark:text-primary-400">
+										<FormattedDate date={post.data.pubDate} />
+									</time>
+									<h2 class={`font-medium tracking-tight transition group-hover:text-primary-600 dark:group-hover:text-primary-400 ${index === 0 ? 'text-3xl sm:text-4xl' : 'text-2xl sm:text-3xl'}`}>
+										{post.data.title}
+									</h2>
+									<p class="text-primary-950/70 dark:text-primary-200/70">
+										{post.data.description}
+									</p>
+								</div>
+							</a>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Layout>
