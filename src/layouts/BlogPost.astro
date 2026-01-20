@@ -11,7 +11,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <Layout title={title} description={description}>
 	<article class="py-16 sm:py-20">
-		<div class="content-container-xl">
+		<div class="content-container">
 			{heroImage && (
 				<div class="mb-8 sm:mb-12">
 					<Image 
@@ -24,7 +24,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				</div>
 			)}
 			
-			<div class="content-container">
+			<div>
 				<header class="mb-8 sm:mb-12 text-center">
 					<div class="mb-4 text-sm sm:text-base text-primary-600 dark:text-primary-400">
 						<FormattedDate date={pubDate} />

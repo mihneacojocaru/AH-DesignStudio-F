@@ -1,0 +1,65 @@
+---
+import type { SanityDocument } from '@sanity/client';
+import { sanityClient } from 'sanity:client';
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
+import { PortableText } from 'astro-portabletext';
+import Layout from '../../../layouts/Layout.astro';
+
+const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]{
+  _id,
+  title,
+  slug,
+  publishedAt,
+  image,
+  body
+}`;
+
+const { slug } = Astro.params;
+const post = await sanityClient.fetch<SanityDocument>(POST_QUERY, { slug });
+
+export async function getStaticPaths() {
+  const SLUGS_QUERY = `*[_type == "post"]{
+    "params": {"slug": slug.current}
+  }`;
+  return await sanityClient.fetch(SLUGS_QUERY);
+}
+
+const { projectId, dataset } = sanityClient.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? createImageUrlBuilder({ projectId, dataset }).image(source)
+    : null;
+
+const postImageUrl = post?.image ? urlFor(post.image)?.width(1280).height(640).url() : null;
+---
+
+<Layout title={post?.title || 'Post'} description="">
+	<article class="py-16 sm:py-20">
+		<div class="content-container">
+			{postImageUrl && (
+				<div class="mb-8 sm:mb-12">
+					<img 
+						src={postImageUrl}
+						alt={post.title}
+						width={1280}
+						height={640}
+						class="w-full h-auto rounded-3xl"
+					/>
+				</div>
+			)}
+			
+			<div class="flex flex-col gap-4 sm:gap-6">
+				<h1 class="text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
+					{post.title}
+				</h1>
+				<time class="text-sm text-primary-600 dark:text-primary-400">
+					Published: {new Date(post.publishedAt).toLocaleDateString()}
+				</time>
+			</div>
+			
+			<div class="prose prose-stone dark:prose-invert mt-8 max-w-none">
+				{Array.isArray(post.body) && <PortableText value={post.body} />}
+			</div>
+		</div>
+	</article>
+</Layout>

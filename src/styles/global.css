@@ -64,3 +64,9 @@
 .content-container-xl:not(.content-container-xl .content-container) {
     @apply mx-auto px-8 max-w-wrapper-xl;
 }
+
+.swiper-container {
+  --swiper-navigation-top-offset: 98%;
+  --swiper-pagination-color: var(--color-primary-950);
+  --swiper-navigation-color: var(--color-primary-950);
+}

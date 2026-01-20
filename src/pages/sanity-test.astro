@@ -1,0 +1,63 @@
+---
+import { sanityClient } from 'sanity:client';
+
+// Test different queries
+const SIMPLE_QUERY = `*[_type == "post"]`;
+const DETAILED_QUERY = `*[_type == "post"]{_id, title, slug, publishedAt}`;
+const ALL_DOCS_QUERY = `*[]`;
+
+let simplePosts = [];
+let detailedPosts = [];
+let allDocs = [];
+let error = null;
+
+try {
+  simplePosts = await sanityClient.fetch(SIMPLE_QUERY);
+  detailedPosts = await sanityClient.fetch(DETAILED_QUERY);
+  allDocs = await sanityClient.fetch(ALL_DOCS_QUERY);
+} catch (e) {
+  error = e;
+}
+
+const config = sanityClient.config();
+---
+
+<html>
+<head>
+  <title>Sanity Connection Test</title>
+  <style>
+    body { font-family: monospace; padding: 2rem; }
+    pre { background: #f4f4f4; padding: 1rem; overflow: auto; }
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <h1>Sanity Connection Test</h1>
+  
+  <h2>Configuration:</h2>
+  <pre>{JSON.stringify(config, null, 2)}</pre>
+  
+  {error ? (
+    <div>
+      <h2 class="error">Error:</h2>
+      <pre class="error">{JSON.stringify(error, null, 2)}</pre>
+    </div>
+  ) : (
+    <div>
+      <h2 class="success">Simple Query: *[_type == "post"]</h2>
+      <p>Found {simplePosts.length} posts</p>
+      <pre>{JSON.stringify(simplePosts, null, 2)}</pre>
+      
+      <h2 class="success">Detailed Query: *[_type == "post"]&#123;_id, title, slug, publishedAt&#125;</h2>
+      <p>Found {detailedPosts.length} posts</p>
+      <pre>{JSON.stringify(detailedPosts, null, 2)}</pre>
+      
+      <h2>All Documents: *[]</h2>
+      <p>Found {allDocs.length} total documents</p>
+      <pre>{JSON.stringify(allDocs.slice(0, 5), null, 2)}</pre>
+      <p><em>Showing first 5 documents only</em></p>
+    </div>
+  )}
+</body>
+</html>
