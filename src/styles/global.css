@@ -52,4 +52,15 @@
   
   --font-size-6xl: 3.75rem;
   --font-size-6xl--line-height: 4.25rem;
+
+  --spacing-wrapper: 1440px;
+  --spacing-wrapper-xl: 1920px;
+}
+
+.content-container:not(.content-container .content-container) {
+    @apply mx-auto px-8 max-w-wrapper;
+}
+
+.content-container-xl:not(.content-container-xl .content-container) {
+    @apply mx-auto px-8 max-w-wrapper-xl;
 }

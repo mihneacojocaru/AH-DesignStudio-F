@@ -4,14 +4,14 @@ import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 import Layout from './Layout.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'portfolio'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
 	<article class="py-16 sm:py-20">
-		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+		<div class="content-container-xl">
 			{heroImage && (
 				<div class="mb-8 sm:mb-12">
 					<Image 
@@ -24,7 +24,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				</div>
 			)}
 			
-			<div class="mx-auto max-w-2xl">
+			<div class="content-container">
 				<header class="mb-8 sm:mb-12 text-center">
 					<div class="mb-4 text-sm sm:text-base text-primary-600 dark:text-primary-400">
 						<FormattedDate date={pubDate} />
