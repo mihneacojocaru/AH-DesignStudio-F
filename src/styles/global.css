@@ -1,6 +1,6 @@
 @import "tailwindcss";
-@import "tailwindcss/theme" layer(theme);
-@import "tailwindcss/utilities" layer(utilities);
+/* @import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities); */
 
 @variant dark (.dark &);
 
@@ -69,4 +69,5 @@
   --swiper-navigation-top-offset: 98%;
   --swiper-pagination-color: var(--color-primary-950);
   --swiper-navigation-color: var(--color-primary-950);
+  --swiper-pagination-bullet-inactive-color: var(--color-primary-500);
 }

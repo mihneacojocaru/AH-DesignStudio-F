@@ -1,4 +1,6 @@
 ---
+import GSAPReveal from '../ui/GSAPReveal.astro';
+
 const testimonials = [
   {
     name: 'Rebecca Hayes',
@@ -30,9 +32,10 @@ const testimonials = [
       <h2 class="text-center text-3xl font-medium tracking-tight sm:text-4xl">
         Trusted by the largest companies in the world
       </h2>
-      <div
-        class="divide-primary-900/10 dark:divide-primary-300/10 grid divide-y lg:grid-cols-3 lg:divide-x lg:divide-y-0"
-      >
+      <GSAPReveal>
+        <div
+          class="divide-primary-900/10 dark:divide-primary-300/10 grid divide-y lg:grid-cols-3 lg:divide-x lg:divide-y-0"
+        >
         {
           testimonials.map((testimonial) => (
             <figure class="mx-auto flex max-w-lg flex-col items-center gap-6 py-8 lg:px-8 lg:py-0">
@@ -64,7 +67,8 @@ const testimonials = [
             </figure>
           ))
         }
-      </div>
+        </div>
+      </GSAPReveal>
     </div>
   </div>
 </section>
