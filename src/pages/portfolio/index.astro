@@ -67,7 +67,7 @@ const urlFor = (source: SanityImageSource) =>
 										height={index === 0 ? 640 : 360} 
 										src={post.data.heroImage} 
 										alt="" 
-										class="h-auto w-full transition duration-300 group-hover:scale-105"
+										class={`h-auto w-full transition duration-300 group-hover:scale-105 ${index !== 0 ? 'max-h-[468px]' : 'object-cover'}`}
 									/>
 								</div>
 							)}

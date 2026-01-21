@@ -11,7 +11,8 @@ const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]{
   slug,
   publishedAt,
   image,
-  body
+  body,
+  gallery
 }`;
 
 const { slug } = Astro.params;
@@ -60,6 +61,37 @@ const postImageUrl = post?.image ? urlFor(post.image)?.width(1280).height(640).u
 			<div class="rte prose prose-stone dark:prose-invert mt-8 max-w-none">
 				{Array.isArray(post.body) && <PortableText value={post.body} />}
 			</div>
+			
+			{/* Gallery Section */}
+			{post?.gallery && post.gallery.length > 0 && (
+				<div class="mt-16">
+					<h2 class="text-3xl font-medium tracking-tight sm:text-4xl mb-8">Gallery</h2>
+					<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+						{
+							post.gallery.map((image: any, index: number) => {
+								const patternIndex = index % 4;
+								const isWide = patternIndex === 1 || patternIndex === 2;
+								const imageUrl = urlFor(image)?.width(isWide ? 1000 : 600).height(540).url();
+								return (
+									<div class={`group relative flex h-48 items-end overflow-hidden rounded shadow-lg md:h-80 ${isWide ? 'md:col-span-2' : ''}`}>
+										<img 
+											src={imageUrl}
+											alt={image.alt || ''}
+											class="absolute inset-0 h-full w-full object-cover object-center" 
+										/>
+										<div class="pointer-events-none absolute inset-0 bg-linear-to-t from-gray-800 via-transparent to-transparent opacity-50"></div>
+										{image.caption && (
+											<span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">
+												{image.caption}
+											</span>
+										)}
+									</div>
+								);
+							})
+						}
+					</div>
+				</div>
+			)}
 		</div>
 	</article>
 </Layout>
