@@ -1,0 +1,166 @@
+/* Rich Text Editor Styles for CMS Content */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+.rte {
+  /* Base typography */
+  @apply text-base sm:text-lg;
+  @apply leading-relaxed;
+  @apply text-primary-950 dark:text-primary-200;
+  
+  /* Paragraphs */
+  p {
+    @apply mb-6;
+    text-wrap: balance; /* Fallback: browsers that don't support will ignore */
+  }
+  
+  /* Fallback for browsers that don't support text-wrap */
+  @supports not (text-wrap: balance) {
+    p {
+      @apply text-left;
+    }
+  }
+  
+  /* Links */
+  a {
+    @apply text-primary-600 dark:text-primary-100;
+    @apply underline decoration-2;
+    @apply underline-offset-2;
+    @apply transition-colors;
+    @apply hover:text-primary-500 dark:hover:text-primary-300;
+  }
+  
+  /* Strong/Bold */
+  strong {
+    @apply font-semibold;
+    @apply text-primary-900 dark:text-primary-100;
+  }
+  
+  /* Emphasis/Italic */
+  em {
+    @apply italic;
+  }
+  
+  /* Underline */
+  u, span[style*="underline"] {
+    @apply underline decoration-primary-600 dark:decoration-primary-400;
+    @apply decoration-2;
+  }
+  
+  /* Strikethrough */
+  del {
+    @apply line-through;
+    @apply text-primary-600 dark:text-primary-400;
+  }
+  
+  /* Headings */
+  
+  h2 {
+    @apply text-3xl font-medium tracking-tight;
+    @apply mt-10 mb-5;
+  }
+  
+  h3 {
+    @apply text-xl font-medium tracking-tight sm:text-2xl;
+    @apply mt-8 mb-4;
+  }
+  
+  h4 {
+    @apply text-lg font-medium tracking-tight sm:text-xl;
+    @apply mt-6 mb-3;
+  }
+  
+  h5, h6 {
+    @apply text-base font-medium tracking-tight sm:text-lg;
+    @apply mt-4 mb-2;
+  }
+  
+  /* Lists */
+  ul, ol {
+    @apply mb-6;
+    @apply pl-8;
+  }
+  
+  ul {
+    @apply list-disc;
+  }
+  
+  ol {
+    @apply list-decimal;
+  }
+  
+  li {
+    @apply mb-2;
+    @apply pl-2;
+  }
+  
+  li:last-child {
+    @apply mb-0;
+  }
+  
+  /* Blockquotes */
+  blockquote {
+    @apply border-l-4 border-primary-300 dark:border-primary-700;
+    @apply pl-6 py-2 mb-6;
+    @apply italic;
+  }
+
+  
+  /* Pre blocks */
+  pre {
+    @apply bg-primary-100 dark:bg-primary-900;
+    @apply rounded-lg;
+    @apply p-4;
+    @apply mb-6;
+    @apply overflow-x-auto;
+  }
+  
+  pre code {
+    @apply bg-transparent;
+    @apply p-0;
+    @apply text-sm;
+  }
+  
+  /* Horizontal rule */
+  hr {
+    @apply border-primary-200 dark:border-primary-800;
+    @apply my-8;
+  }
+  
+  /* Images */
+  img {
+    @apply rounded-lg;
+    @apply shadow-lg;
+    @apply mb-6;
+    @apply max-w-full;
+    @apply h-auto;
+  }
+  
+  /* Tables */
+  table {
+    @apply w-full;
+    @apply border-collapse;
+    @apply mb-6;
+  }
+  
+  th, td {
+    @apply border border-primary-200 dark:border-primary-800;
+    @apply px-4 py-2;
+    @apply text-left;
+  }
+  
+  th {
+    @apply bg-primary-50 dark:bg-primary-900;
+    @apply font-medium;
+  }
+  
+  /* Figure for captions */
+  figure {
+    @apply mb-6;
+  }
+  
+  figcaption {
+    @apply text-sm;
+    @apply text-primary-600 dark:text-primary-400;
+    @apply text-center;
+    @apply mt-2;
+  }
+}
