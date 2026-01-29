@@ -1,0 +1,136 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  headline: string;
+  images: ImageMetadata[];
+  sideImage?: ImageMetadata;
+  sideText?: string;
+  sideLink?: string;
+}
+
+const { headline, images, sideImage, sideText, sideLink } = Astro.props;
+---
+
+<div>
+  <section
+    id="sectionPin"
+    class="h-screen overflow-hidden flex relative bg-primary-200 text-primary-900 dark:bg-primary-800 dark:text-primary-100"
+  >
+    <div class="pin-wrap h-screen flex justify-start items-center px-[10vw] py-[50px] will-change-transform">
+      <h2 class="min-w-[60vw] max-w-[500px] px-[5vw] shrink-0 text-2xl sm:text-3xl lg:text-4xl leading-tight font-medium">
+        {headline}
+      </h2>
+      {images.map((img, index) => (
+        <div class="min-w-[60vw] md:min-w-[60vw] max-sm:min-w-[80vw] px-[5vw] max-sm:px-[2vw] shrink-0 flex items-center justify-center">
+          <Image
+            src={img}
+            alt={`Gallery image ${index + 1}`}
+            class="h-[70vh] max-sm:h-[50vh] w-auto max-w-[80vw] object-cover rounded-2xl"
+            width={900}
+            height={600}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {sideImage && (
+    <section class="w-full relative grid grid-cols-1 gap-8 px-[10vw] place-items-center bg-primary-100 text-primary-900 dark:bg-primary-900 dark:text-primary-100">
+      <div class="flex flex-col items-center gap-8 my-16">
+        <Image
+          src={sideImage}
+          alt="Feature image"
+          class="h-[70vh] max-sm:h-[50vh] w-auto max-w-full object-cover rounded-3xl"
+          width={500}
+          height={600}
+        />
+        {sideText && (
+          <h2 class="text-xl sm:text-2xl lg:text-3xl font-medium text-center text-primary-900 dark:text-primary-100">
+            {sideLink ? (
+              <a href={sideLink} target="_blank" rel="noopener" class="hover:opacity-70 transition-opacity">
+                {sideText}
+              </a>
+            ) : (
+              sideText
+            )}
+          </h2>
+        )}
+      </div>
+    </section>
+  )}
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let scrollTriggerInstance: ScrollTrigger | null = null;
+  let tweenInstance: gsap.core.Tween | null = null;
+
+  function initHorizontalScroll() {
+    const pinWrap = document.querySelector('.pin-wrap') as HTMLElement;
+    const sectionPin = document.querySelector('#sectionPin') as HTMLElement;
+
+    if (!pinWrap || !sectionPin) return;
+
+    // Kill existing instances
+    if (scrollTriggerInstance) {
+      scrollTriggerInstance.kill();
+      scrollTriggerInstance = null;
+    }
+    if (tweenInstance) {
+      tweenInstance.kill();
+      tweenInstance = null;
+    }
+
+    // Reset transform
+    gsap.set(pinWrap, { x: 0 });
+
+    const getScrollLength = () => pinWrap.scrollWidth - window.innerWidth;
+
+    tweenInstance = gsap.to(pinWrap, {
+      x: () => -getScrollLength(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: sectionPin,
+        pin: true,
+        scrub: 0.5,
+        start: 'top top',
+        end: () => `+=${getScrollLength()}`,
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+      },
+    });
+
+    if (tweenInstance.scrollTrigger) {
+      scrollTriggerInstance = tweenInstance.scrollTrigger;
+    }
+  }
+
+  // Initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initHorizontalScroll, 100);
+    });
+  } else {
+    setTimeout(initHorizontalScroll, 100);
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', () => {
+    setTimeout(initHorizontalScroll, 100);
+  });
+
+  // Handle resize with debounce
+  let resizeTimeout: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      ScrollTrigger.refresh(true);
+    }, 250);
+  });
+</script>

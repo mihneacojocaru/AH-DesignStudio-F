@@ -1,49 +1,82 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import HorizontalScrollSection from '../components/HorizontalScrollSection.astro';
 import Layout from './Layout.astro';
 
-type Props = CollectionEntry<'portfolio'>['data'];
+type Props = CollectionEntry<'portfolio'>['data'] & {
+	galleryHeadline?: string;
+	galleryImages?: ImageMetadata[];
+	sideImage?: ImageMetadata;
+	sideText?: string;
+	sideLink?: string;
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const {
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	heroImage,
+	galleryHeadline,
+	galleryImages,
+	sideImage,
+	sideText,
+	sideLink
+} = Astro.props;
+
+const hasGallery = galleryImages && galleryImages.length > 0;
 ---
 
 <Layout title={title} description={description}>
-	<article class="py-16 sm:py-20">
-		<div class="content-container">
-			{heroImage && (
-				<div class="mb-8 sm:mb-12">
-					<Image 
-						width={1020} 
-						height={510} 
-						src={heroImage} 
-						alt="" 
-						class="w-full h-auto rounded-3xl"
-					/>
-				</div>
-			)}
-			
-			<div>
-				<header class="mb-8 sm:mb-12 text-center">
-					<div class="mb-4 text-sm sm:text-base text-primary-600 dark:text-primary-400">
-						<FormattedDate date={pubDate} />
-						{updatedDate && (
-							<div class="mt-2 italic text-primary-500 dark:text-primary-500">
-								Last updated on <FormattedDate date={updatedDate} />
-							</div>
-						)}
+	<article class={hasGallery ? 'overflow-x-hidden' : ''}>
+		<div class="py-16 sm:py-20">
+			<div class="content-container">
+				{heroImage && (
+					<div class="mb-8 sm:mb-12">
+						<Image
+							width={1020}
+							height={510}
+							src={heroImage}
+							alt=""
+							class="w-full h-auto rounded-3xl"
+						/>
 					</div>
-					<h1 class="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
-						{title}
-					</h1>
-					<hr class="border-primary-200 dark:border-primary-800" />
-				</header>
-				
-				<div class="prose prose-lg prose-primary dark:prose-invert max-w-none">
-					<slot />
+				)}
+
+				<div>
+					<header class="mb-8 sm:mb-12 text-center">
+						<div class="mb-4 text-sm sm:text-base text-primary-600 dark:text-primary-400">
+							<FormattedDate date={pubDate} />
+							{updatedDate && (
+								<div class="mt-2 italic text-primary-500 dark:text-primary-500">
+									Last updated on <FormattedDate date={updatedDate} />
+								</div>
+							)}
+						</div>
+						<h1 class="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
+							{title}
+						</h1>
+						<hr class="border-primary-200 dark:border-primary-800" />
+					</header>
+
+					<div class="prose prose-lg prose-primary dark:prose-invert max-w-none">
+						<slot />
+					</div>
 				</div>
 			</div>
 		</div>
+
+		{hasGallery && (
+			<HorizontalScrollSection
+				headline={galleryHeadline || 'Explore the gallery'}
+				images={galleryImages}
+				sideImage={sideImage}
+				sideText={sideText}
+				sideLink={sideLink}
+			/>
+		)}
 	</article>
 </Layout>

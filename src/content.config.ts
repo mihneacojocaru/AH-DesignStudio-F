@@ -9,10 +9,15 @@ const portfolio = defineCollection({
 		z.object({
 			title: z.string(),
 			description: z.string(),
-			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: image().optional(),
+			// Gallery fields for horizontal scroll
+			galleryHeadline: z.string().optional(),
+			galleryImages: z.array(image()).optional(),
+			sideImage: image().optional(),
+			sideText: z.string().optional(),
+			sideLink: z.string().optional(),
 		}),
 });
 
