@@ -2,26 +2,29 @@
 
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
+import { loadEnv } from 'vite';
 
 import alpinejs from '@astrojs/alpinejs';
 
 import sanity from '@sanity/astro';
 
+const { SANITY_PROJECT_ID, SANITY_DATASET, SANITY_API_VERSION, SANITY_TOKEN } = loadEnv(process.env.NODE_ENV, process.cwd(), '');
+
 // https://astro.build/config
 export default defineConfig({
     site: 'https://example.com',
     integrations: [
-        mdx(), 
-        sitemap(), 
-        alpinejs(), 
+        mdx(),
+        sitemap(),
+        alpinejs(),
         sanity({
-            projectId: '2cpcrc28',
-            dataset: 'production',
+            projectId: SANITY_PROJECT_ID,
+            dataset: SANITY_DATASET,
             useCdn: false,
-            apiVersion: '2024-01-01',
-            token: 'skI46jNOj3JuqSCjfSOq1ImkKpRqt7nA99zaFUIrGF73CyspkQfJKKZfH9dIpZoGQwwQCwotk9jPMkkwsKBmJvBlWwUU4xIqlygcSy45iDazwSUZXLQFVQCV5ErdKGxzwrgka4UgO7JpwrPh3kauM8tuMdKAWffeX1uJ780NJ51JNTfunZXm',
+            apiVersion: SANITY_API_VERSION,
+            token: SANITY_TOKEN,
         })
     ],
     vite: {
