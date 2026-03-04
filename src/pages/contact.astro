@@ -25,13 +25,13 @@ const socials = [
           Starten wir dein<br />
           nächstes Projekt?
         </h1>
-        <p class="text-lg italic sm:text-2xl text-primary-950 dark:text-primary-200 max-w-md leading-relaxed ml-auto lg:mt-20">
+        <p class="text-lg italic sm:text-2xl text-primary-950 dark:text-primary-200 max-w-md leading-relaxed md:ml-auto lg:mt-20">
           …oder einfach über Design & Alltag plaudern: Wo landet eigentlich immer alles, wenn kein Stauraum da ist?
         </p>
       </div>
       <div class="flex flex-col gap-12 lg:mt-16 lg:justify-self-center">
-        <a href="mailto:info@ah-designstudio.de" class="text-2xl sm:text-4xl font-medium italic underline underline-offset-8 decoration-1 hover:opacity-80 transition-opacity" >
-          info@ah-designstudio.de
+        <a href="mailto:info@ah-designstudio.de" class="group text-2xl sm:text-4xl font-medium italic transition">
+          <span class="group-hover:underline">info@ah-designstudio.de</span>
         </a>
 
         <div class="grid grid-cols-2 gap-x-4 max-w-md">
@@ -40,10 +40,10 @@ const socials = [
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2 py-4"
+              class="group flex items-center gap-2 py-4"
             >
               <span class="h-8 w-8 shrink-0 [&>svg]:w-full [&>svg]:h-full" set:html={s.icon} />
-              <span class="text-lg font-medium">{s.label}</span>
+              <span class="text-lg font-medium group-hover:underline">{s.label}</span>
             </a>
           ))}
         </div>
