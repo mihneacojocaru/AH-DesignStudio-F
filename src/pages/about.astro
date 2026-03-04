@@ -11,24 +11,23 @@ import Layout from '../layouts/Layout.astro';
 >
   <section class="content-container-p-tablet">
     <h1 class="font-archivo text-5xl sm:text-7xl lg:text-9xl font-bold tracking-widest uppercase leading-none my-30 max-md:text-center">About Me</h1>
-    <div class="grid md:grid-cols-2 gap-4 mb-10 lg:mb-20">
-      <div class="order-2 md:order-1 px-8 space-y-10 lg:space-y-16 text-balance text-2xl lg:flex lg:flex-col lg:justify-center">
+    <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-4 mb-20 lg:mb-30">
+      <div class="order-2 md:order-1 px-8 space-y-10 lg:space-y-16 text-balance text-2xl lg:col-span-5 lg:flex lg:flex-col lg:justify-end">
         <h2 class="font-bold tracking-widest uppercase leading-none max-lg:mt-12">
           Alex Herr
         </h2>
-        <p class="tracking-wide leading-relaxed lg:ml-8">
+        <p class="tracking-wide leading-relaxed">
           Mein Name ist <strong class="font-extrabold">Alex Herr</strong>, geboren am 01.12.1990
           in Bonn. Ich bin gelernter Schreiner und studierter Innenarchitekt.
         </p>
-        <p class="tracking-wide leading-relaxed text-primary-950 dark:text-primary-200 lg:ml-16">
+        <p class="tracking-wide leading-relaxed text-primary-950 dark:text-primary-200">
           Meine Leidenschaft für Innenarchitektur liegt in der Kombination aus Design,
           Funktionalität und Ästhetik. Es fasziniert mich, wie gut durchdachte Räume das
           Wohlbefinden der Menschen beeinflussen und kreativ sowie technisch präzise gestaltet
           werden können.
         </p>
       </div>
-      
-      <div class="flex flex-col order-1 md:order-2">
+      <div class="flex flex-col order-1 md:order-2 lg:col-start-7 lg:col-span-6">
         <Image
           src={aboutImage}
           alt="Alex Herr – Innenarchitekt"
