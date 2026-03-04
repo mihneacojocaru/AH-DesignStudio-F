@@ -1,17 +1,40 @@
 ---
-import Heading from '../components/about/Heading.astro';
-import Mission from '../components/about/Mission.astro';
-import Team from '../components/about/Team.astro';
-import Values from '../components/about/Values.astro';
+import { Image } from 'astro:assets';
+import aboutImage from '../assets/about-me-image.png';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  description="Find more our history, values, mission and more. We are a group of people who share the same values."
-  title="About · Stone"
+  description="Mein Name ist Alex Herr, gelernter Schreiner und studierter Innenarchitekt aus Bonn."
+  title="About · AH Design Studio"
 >
-  <Heading />
-  <Mission />
-  <Values />
-  <Team />
+  <section class="content-container-p-tablet">
+    <h1 class="font-archivo text-5xl sm:text-7xl lg:text-9xl font-bold tracking-widest uppercase leading-none my-30 px-8 max-md:text-center">About Me</h1>
+    <div class="grid md:grid-cols-2 gap-4 mb-10 lg:mb-20">
+      <div class="order-2 md:order-1 px-8 space-y-10 lg:space-y-16 text-balance text-2xl lg:flex lg:flex-col lg:justify-center">
+        <h2 class="font-bold tracking-widest uppercase leading-none">
+          Alex Herr
+        </h2>
+        <p class="tracking-wide leading-relaxed lg:ml-8">
+          Mein Name ist <strong class="font-extrabold">Alex Herr</strong>, geboren am 01.12.1990
+          in Bonn. Ich bin gelernter Schreiner und studierter Innenarchitekt.
+        </p>
+        <p class="tracking-wide leading-relaxed text-primary-950 dark:text-primary-200 lg:ml-16">
+          Meine Leidenschaft für Innenarchitektur liegt in der Kombination aus Design,
+          Funktionalität und Ästhetik. Es fasziniert mich, wie gut durchdachte Räume das
+          Wohlbefinden der Menschen beeinflussen und kreativ sowie technisch präzise gestaltet
+          werden können.
+        </p>
+      </div>
+      
+      <div class="flex flex-col order-1 md:order-2">
+        <Image
+          src={aboutImage}
+          alt="Alex Herr – Innenarchitekt"
+          loading="eager"
+          class="w-full h-full object-cover object-top"
+        />
+      </div>
+    </div>
+  </section>
 </Layout>

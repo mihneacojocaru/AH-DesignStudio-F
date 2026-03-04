@@ -6,6 +6,10 @@
     @apply mx-auto px-8 max-w-wrapper-xl;
 }
 
+.content-container-p-tablet:not(.content-container-p-tablet .content-container-p-tablet) {
+    @apply mx-auto md:px-8 max-w-wrapper;
+}
+
 .swiper-container {
   --swiper-navigation-top-offset: 98%;
   --swiper-pagination-color: var(--color-primary-950);

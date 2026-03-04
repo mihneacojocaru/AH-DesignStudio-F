@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Archivo Black';
+  src: url('/fonts/ArchivoBlack-Regular.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @variant dark (.dark &);
 
 @theme {
@@ -19,6 +27,7 @@
 
   /* Font Family */
   --font-sans: 'Inter', sans-serif;
+  --font-archivo: 'Archivo Black', sans-serif;
 
   /* Font Sizes */
   --font-size-xs: 0.75rem;
