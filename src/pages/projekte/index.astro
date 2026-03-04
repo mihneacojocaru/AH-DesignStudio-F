@@ -37,14 +37,14 @@ const urlFor = (source: SanityImageSource) =>
 ---
 
 <Layout 
-	title="Portfolio" 
+	title="Projekte"
 	description="Explore our latest projects and work"
 >
 	<section class="py-16 sm:py-20">
 		<div class="content-container">
 			<div class="mb-12 sm:mb-16">
 				<h1 class="text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
-					Portfolio
+					Projekte
 				</h1>
 				<p class="mt-4 text-lg text-primary-950/70 dark:text-primary-200/70">
 					Explore our latest projects and work
@@ -57,7 +57,7 @@ const urlFor = (source: SanityImageSource) =>
 				localPosts.map((post) => (
 					<article>
 						<a
-							href={`/portfolio/${post.id}/`}
+							href={`/projekte/${post.id}/`}
 							class="group block"
 						>
 							{post.data.heroImage && (
@@ -97,7 +97,7 @@ const urlFor = (source: SanityImageSource) =>
 					return (
 						<article>
 							<a
-								href={`/portfolio/cms/${post.slug.current}/`}
+								href={`/projekte/cms/${post.slug.current}/`}
 								class="group block"
 							>
 								{postImageUrl && (

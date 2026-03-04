@@ -55,7 +55,7 @@ const urlFor = (source: SanityImageSource) =>
           
           return (
             <div class="swiper-slide">
-              <a href={`/portfolio/cms/${post.slug.current}/`} class="group block cursor-pointer">
+              <a href={`/projekte/cms/${post.slug.current}/`} class="group block cursor-pointer">
                 <div class="overflow-hidden rounded-3xl">
                   {postImageUrl && (
                     <img 
@@ -75,7 +75,7 @@ const urlFor = (source: SanityImageSource) =>
         {/* Local posts */}
         {localPosts.map((post) => (
           <div class="swiper-slide">
-            <a href={`/portfolio/${post.id}/`} class="group block">
+            <a href={`/projekte/${post.id}/`} class="group block">
               <div class="overflow-hidden rounded-3xl">
                 {post.data.heroImage && (
                   <Image 
