@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import aboutImage from '../assets/about-me-image.png';
 import Layout from '../layouts/Layout.astro';
+import GSAPReveal from '../components/ui/GSAPReveal.astro';
 ---
 
 <Layout
@@ -10,9 +11,11 @@ import Layout from '../layouts/Layout.astro';
   bgColor="bg-theme-surface-green dark:bg-theme-surface-green-dark"
 >
   <section class="content-container-p-tablet">
-    <h1 class="font-roslindale text-6xl sm:text-8xl xl:text-[8vw] leading-[1.05] italic tracking-tight my-16 md:my-30 max-md:px-8">Über mich</h1>
+    <GSAPReveal>
+      <h1 class="font-roslindale text-6xl sm:text-8xl xl:text-[8vw] leading-[1.05] italic tracking-tight my-16 md:my-30 max-md:px-8">Über mich</h1>
+    </GSAPReveal>
     <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-4 mb-20 lg:mb-30">
-      <div class="order-2 md:order-1 max-md:px-8 space-y-10 lg:space-y-16 text-balance text-2xl lg:col-span-5 lg:flex lg:flex-col lg:justify-end">
+      <GSAPReveal class="order-2 md:order-1 lg:col-span-5 max-md:px-8 space-y-10 lg:space-y-16 text-balance text-2xl flex flex-col lg:justify-end">
         <h2 class="font-bold tracking-widest uppercase leading-none max-lg:mt-12">
           Alex Herr
         </h2>
@@ -26,15 +29,15 @@ import Layout from '../layouts/Layout.astro';
           Wohlbefinden der Menschen beeinflussen und kreativ sowie technisch präzise gestaltet
           werden können.
         </p>
-      </div>
-      <div class="flex flex-col order-1 md:order-2 lg:col-start-7 lg:col-span-6">
+      </GSAPReveal>
+      <GSAPReveal class="order-1 md:order-2 lg:col-start-7 lg:col-span-6 flex flex-col">
         <Image
           src={aboutImage}
           alt="Alex Herr – Innenarchitekt"
           loading="eager"
           class="w-full h-full object-cover object-top"
         />
-      </div>
+      </GSAPReveal>
     </div>
   </section>
 </Layout>

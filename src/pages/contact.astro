@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import GSAPReveal from '../components/ui/GSAPReveal.astro';
 import linkedinIcon from '../assets/icons/linkedin.svg?raw';
 import instagramIcon from '../assets/icons/instagram.svg?raw';
 import whatsappIcon from '../assets/icons/whatsapp.svg?raw';
@@ -20,34 +21,38 @@ const socials = [
 >
   <section class="content-container min-h-[70vh] flex items-center py-20">
     <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
-      <div class="space-y-16 lg:space-y-8">
-        <h1 class="font-roslindale text-6xl sm:text-8xl xl:text-[8vw] leading-[1.05] italic tracking-tight">
-          Starten wir dein<br />
-          nächstes Projekt?
-        </h1>
-        <p class="text-lg italic sm:text-2xl text-primary-950 dark:text-primary-200 max-w-md leading-relaxed md:ml-auto lg:mt-20">
-          …oder einfach über Design & Alltag plaudern: Wo landet eigentlich immer alles, wenn kein Stauraum da ist?
-        </p>
-      </div>
-      <div class="flex flex-col gap-12 lg:mt-16 lg:justify-self-center">
-        <a href="mailto:info@ah-designstudio.de" class="group text-2xl sm:text-4xl font-medium italic transition">
-          <span class="group-hover:underline">info@ah-designstudio.de</span>
-        </a>
-
-        <div class="grid grid-cols-2 gap-x-4 max-w-md">
-          {socials.map((s) => (
-            <a
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex items-center gap-2 py-4"
-            >
-              <span class="h-8 w-8 shrink-0 [&>svg]:w-full [&>svg]:h-full" set:html={s.icon} />
-              <span class="text-lg font-medium group-hover:underline">{s.label}</span>
-            </a>
-          ))}
+      <GSAPReveal>
+        <div class="space-y-16 lg:space-y-8">
+          <h1 class="font-roslindale text-6xl sm:text-8xl xl:text-[8vw] leading-[1.05] italic tracking-tight">
+            Starten wir dein<br />
+            nächstes Projekt?
+          </h1>
+          <p class="text-lg italic sm:text-2xl text-primary-950 dark:text-primary-200 max-w-md leading-relaxed md:ml-auto lg:mt-20">
+            …oder einfach über Design & Alltag plaudern: Wo landet eigentlich immer alles, wenn kein Stauraum da ist?
+          </p>
         </div>
-      </div>
+      </GSAPReveal>
+      <GSAPReveal>
+        <div class="flex flex-col gap-12 lg:mt-16 lg:justify-self-center">
+          <a href="mailto:info@ah-designstudio.de" class="group text-2xl sm:text-4xl font-medium italic transition">
+            <span class="group-hover:underline">info@ah-designstudio.de</span>
+          </a>
+
+          <div class="grid grid-cols-2 gap-x-4 max-w-md">
+            {socials.map((s) => (
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex items-center gap-2 py-4"
+              >
+                <span class="h-8 w-8 shrink-0 [&>svg]:w-full [&>svg]:h-full" set:html={s.icon} />
+                <span class="text-lg font-medium group-hover:underline">{s.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </GSAPReveal>
     </div>
   </section>
 </Layout>

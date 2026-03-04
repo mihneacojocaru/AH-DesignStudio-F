@@ -1,8 +1,11 @@
 ---
-// GSAP ScrollTrigger component for advanced animations
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
 ---
 
-<div class="gsap-reveal">
+<div class={`gsap-reveal ${className}`.trim()}>
   <slot />
 </div>
 
