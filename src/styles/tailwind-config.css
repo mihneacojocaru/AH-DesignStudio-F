@@ -25,6 +25,10 @@
   --color-primary-900: var(--color-stone-900);
   --color-primary-950: var(--color-stone-950);
 
+  --color-theme-surface-green: #AAC2BD;
+  --color-theme-surface-green-dark: #1b2121; /* placeholder – bitte später ersetzen */
+  --color-theme-surface-darkred: #684E58;
+
   /* Font Family */
   --font-sans: 'Inter', sans-serif;
   --font-archivo: 'Archivo Black', sans-serif;
