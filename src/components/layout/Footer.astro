@@ -1,4 +1,6 @@
 ---
+import logoSvg from '../../assets/AH-DesignStudio-Logo.svg?raw';
+
 const currentYear = new Date().getFullYear();
 
 const bottomLinks = [
@@ -18,15 +20,15 @@ const bottomLinks = [
     ],
   },
   {
-    header: 'Company',
+    header: 'Navigation',
     links: [
       {
-        name: 'Home',
+        name: 'Startseite',
         href: '/',
         isExternal: false,
       },
       {
-        name: 'About',
+        name: 'Über mich',
         href: '/about',
         isExternal: false,
       },
@@ -36,14 +38,19 @@ const bottomLinks = [
         isExternal: false,
       },
       {
-        name: 'Contact',
+        name: 'Kontakt',
         href: '/contact',
+        isExternal: false,
+      },
+      {
+        name: 'Styleguide - Test',
+        href: '/styleguide',
         isExternal: false,
       },
     ],
   },
   {
-    header: 'Legal',
+    header: 'Rechtliches',
     links: [
       {
         name: 'Impressum',
@@ -53,16 +60,6 @@ const bottomLinks = [
       {
         name: 'Datenschutz',
         href: '/datenschutz',
-        isExternal: false,
-      },
-      {
-        name: '404',
-        href: '/404',
-        isExternal: false,
-      },
-      {
-        name: 'Styleguide',
-        href: '/styleguide',
         isExternal: false,
       },
     ],
@@ -78,13 +75,14 @@ const bottomLinks = [
   <div class="content-container">
     <div class="flex flex-col justify-between gap-12 sm:gap-16 lg:flex-row">
       <div class="flex max-w-sm flex-col items-start gap-6 sm:gap-8">
-        <img
-          class="h-18 w-auto"
-          width="154"
-          height="77"
-          src="/assets/AH-DesignStudio-Logo.svg"
-          alt="Alex Herr Logo"
-        />
+        <a href="/" class="focus-visible:outline-primary-950 dark:group-focus-visible:outline-primary-200 rounded-md focus-visible:outline-2">
+          <span class="sr-only">Zur Startseite</span>
+          <span
+            class="block h-18 w-auto [&>svg]:h-full [&>svg]:w-auto"
+            aria-hidden="true"
+            set:html={logoSvg}
+          />
+        </a>
         <p class="text-primary-950/70 dark:text-primary-200/70 text-base">
           Alex Herr Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam quisquam, totam dignissimos facilis maiores nemo!
         </p>

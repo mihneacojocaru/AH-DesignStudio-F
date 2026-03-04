@@ -1,4 +1,6 @@
 ---
+import logoSvg from '../../assets/AH-DesignStudio-Logo.svg?raw';
+
 const links = [
   {
     ref: '01',
@@ -35,15 +37,13 @@ const links = [
     <div class="flex">
       <a
         href="/"
-        class="focus-visible:outline-primary-950 dark:group-focus-visible:outline-primary-200 rounded-md focus-visible:outline focus-visible:outline-2"
+        class="focus-visible:outline-primary-950 dark:group-focus-visible:outline-primary-200 rounded-md focus-visible:outline-2"
       >
         <span class="sr-only">Alex Herr Logo</span>
-        <img
-          class="h-16 md:h-26 w-auto"
-          width="154"
-          height="77"
-          src="/assets/AH-DesignStudio-Logo.svg"
-          alt="Alex Herr Logo"
+        <span
+          class="block h-16 md:h-26 w-auto [&>svg]:h-full [&>svg]:w-auto"
+          aria-hidden="true"
+          set:html={logoSvg}
         />
       </a>
     </div>
