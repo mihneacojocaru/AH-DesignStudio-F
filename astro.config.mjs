@@ -14,7 +14,7 @@ const { SANITY_PROJECT_ID, SANITY_DATASET, SANITY_API_VERSION, SANITY_TOKEN } = 
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://example.com',
+    site: 'https://ah-designstudio.de',
     integrations: [
         mdx(),
         sitemap(),
