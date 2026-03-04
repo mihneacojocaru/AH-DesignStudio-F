@@ -1,13 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Archivo Black';
-  src: url('/fonts/ArchivoBlack-Regular.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 @variant dark (.dark &);
 
 @theme {
@@ -25,13 +17,18 @@
   --color-primary-900: var(--color-stone-900);
   --color-primary-950: var(--color-stone-950);
 
+  --color-theme-accent-primary: #F7838D;
+
   --color-theme-surface-green: #AAC2BD;
-  --color-theme-surface-green-dark: #1b2121; /* placeholder – bitte später ersetzen */
+  --color-theme-surface-green-dark: #1b2121;
+  --color-theme-surface-cream: #e5e3dc;
+  --color-theme-surface-cream-dark: #0E0B0A;
   --color-theme-surface-darkred: #684E58;
 
   /* Font Family */
   --font-sans: 'Inter', sans-serif;
   --font-archivo: 'Archivo Black', sans-serif;
+  --font-roslindale: 'Roslindale Display Condensed', sans-serif;
 
   /* Font Sizes */
   --font-size-xs: 0.75rem;

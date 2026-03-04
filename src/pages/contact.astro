@@ -1,12 +1,53 @@
 ---
-import ContactForm from '../components/contact/ContactForm.astro';
-import ContactInfo from '../components/contact/ContactInfo.astro';
 import Layout from '../layouts/Layout.astro';
+import linkedinIcon from '../assets/icons/linkedin.svg?raw';
+import instagramIcon from '../assets/icons/instagram.svg?raw';
+import whatsappIcon from '../assets/icons/whatsapp.svg?raw';
+import spotifyIcon from '../assets/icons/spotify.svg?raw';
+
+const socials = [
+  { label: 'WhatsApp', icon: whatsappIcon, href: 'https://wa.me/' },
+  { label: 'Instagram', icon: instagramIcon, href: 'https://instagram.com/' },
+  { label: 'LinkedIn', icon: linkedinIcon, href: 'https://www.linkedin.com/in/alex-herr-a756a6297/' },
+  { label: 'Spotify', icon: spotifyIcon, href: 'https://spotify.com/' },
+];
 ---
 
 <Layout
-  description="Contact our team to learn more about how we can help you."
-  title="Contact · Stone"
+  description="Kontaktiere Alex Herr – Innenarchitekt aus München."
+  title="Kontakt · AH Design Studio"
+  bgColor="bg-theme-surface-cream dark:bg-theme-surface-cream-dark"
 >
-  <ContactInfo />
+  <section class="content-container min-h-[70vh] flex items-center py-20">
+    <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
+      <div class="space-y-16 lg:space-y-8">
+        <h1 class="font-roslindale text-6xl sm:text-8xl xl:text-[8vw] leading-[1.05] italic tracking-tight">
+          Starten wir dein<br />
+          nächstes Projekt?
+        </h1>
+        <p class="text-lg italic sm:text-2xl text-primary-950 dark:text-primary-200 max-w-md leading-relaxed ml-auto lg:mt-20">
+          …oder einfach über Design & Alltag plaudern: Wo landet eigentlich immer alles, wenn kein Stauraum da ist?
+        </p>
+      </div>
+      <div class="flex flex-col gap-12 lg:mt-16 lg:justify-self-center">
+        <a href="mailto:info@ah-designstudio.de" class="text-2xl sm:text-4xl font-medium italic underline underline-offset-8 decoration-1 hover:opacity-80 transition-opacity" >
+          info@ah-designstudio.de
+        </a>
+
+        <div class="grid grid-cols-2 gap-x-4 max-w-md">
+          {socials.map((s) => (
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 py-4"
+            >
+              <span class="h-8 w-8 shrink-0 [&>svg]:w-full [&>svg]:h-full" set:html={s.icon} />
+              <span class="text-lg font-medium">{s.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
