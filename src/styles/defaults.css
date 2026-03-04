@@ -10,6 +10,14 @@
     @apply mx-auto md:px-8 max-w-wrapper;
 }
 
+.heading-display {
+  @apply font-roslindale italic tracking-tight leading-[1.05];
+}
+
+.heading-display-regular {
+  @apply font-roslindale italic tracking-tight leading-[1.05];
+}
+
 .swiper-container {
   --swiper-navigation-top-offset: 98%;
   --swiper-pagination-color: var(--color-primary-950);
