@@ -5,6 +5,7 @@ import linkedinIcon from '../assets/icons/linkedin.svg?raw';
 import instagramIcon from '../assets/icons/instagram.svg?raw';
 import whatsappIcon from '../assets/icons/whatsapp.svg?raw';
 import spotifyIcon from '../assets/icons/spotify.svg?raw';
+import paperAirplaneIcon from '../assets/icons/paper-airplane.svg?raw';
 
 const socials = [
   { label: 'WhatsApp', icon: whatsappIcon, href: 'https://wa.me/' },
@@ -35,7 +36,7 @@ const socials = [
       <GSAPReveal>
         <div class="flex flex-col gap-12 lg:mt-16 lg:justify-self-center">
           <a href="mailto:info@ah-designstudio.de" class="group text-2xl sm:text-4xl font-medium italic transition">
-            <span class="group-hover:underline">info@ah-designstudio.de</span>
+            <span id="email-text" class="group-hover:underline">info@ah-designstudio.de</span>
           </a>
 
           <div class="grid grid-cols-2 gap-x-4 max-w-md">
@@ -55,4 +56,122 @@ const socials = [
       </GSAPReveal>
     </div>
   </section>
+
+  <div
+    id="cursor-flair"
+    aria-hidden="true"
+    class="[&>svg]:w-full [&>svg]:h-full [&>svg]:fill-primary-950 dark:[&>svg]:fill-primary-200"
+    set:html={paperAirplaneIcon}
+  />
 </Layout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { SplitText } from 'gsap/SplitText';
+
+  gsap.registerPlugin(SplitText);
+
+  document.fonts.ready.then(() => {
+    const emailEl = document.getElementById('email-text');
+    if (!emailEl) return;
+
+    const runAnimation = () => {
+      const split = SplitText.create(emailEl, {
+        type: 'chars,words',
+        charsClass: 'char',
+      });
+
+      gsap.from(split.chars, {
+        duration: 0.8,
+        opacity: 0,
+        scale: 0,
+        y: 60,
+        rotationX: 180,
+        transformOrigin: '0% 25% -25',
+        ease: 'back',
+        stagger: 0.04,
+        onComplete: () => {
+          split.revert();
+        },
+      });
+    };
+
+    setTimeout(() => {
+      runAnimation();
+    }, 3000);
+  });
+
+  // Paper-airplane cursor follower (desktop only)
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const flair = document.getElementById('cursor-flair');
+    if (flair) {
+      const OFFSET = -60;
+
+      const xTo = gsap.quickTo(flair, 'x', { duration: 0.55, ease: 'power3.out' });
+      const yTo = gsap.quickTo(flair, 'y', { duration: 0.55, ease: 'power3.out' });
+      const rotateTo = gsap.quickTo(flair, 'rotation', { duration: 0.4, ease: 'power2.out' });
+
+      let prevX = 0;
+      let prevY = 0;
+      let lastRad = 0;
+      let currentAngle = 41; // matches the SVG's natural orientation offset
+      let hasEntered = false;
+
+      window.addEventListener('mousemove', (e) => {
+        const dx = e.clientX - prevX;
+        const dy = e.clientY - prevY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist > 2) {
+          lastRad = Math.atan2(dy, dx);
+
+          // SVG tip points upper-right (~-41°), +41 corrects for that
+          let angle = lastRad * (180 / Math.PI) + 41;
+
+          // Normalize angle to prevent spinning the long way around when direction reverses
+          while (angle - currentAngle > 180) angle -= 360;
+          while (angle - currentAngle < -180) angle += 360;
+          currentAngle = angle;
+
+          rotateTo(angle);
+        }
+
+        // Offset position ahead of cursor in movement direction
+        xTo(e.clientX + Math.cos(lastRad) * OFFSET);
+        yTo(e.clientY + Math.sin(lastRad) * OFFSET);
+
+        prevX = e.clientX;
+        prevY = e.clientY;
+
+        if (!hasEntered) {
+          hasEntered = true;
+          gsap.to(flair, { opacity: 1, duration: 0.4 });
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        gsap.to(flair, { opacity: 0, duration: 0.3 });
+        hasEntered = false;
+      });
+
+      document.addEventListener('mouseenter', () => {
+        if (hasEntered) gsap.to(flair, { opacity: 1, duration: 0.3 });
+      });
+
+      // Shrink on links
+      let restoreTimeout: ReturnType<typeof setTimeout> | null = null;
+
+      document.querySelectorAll('a, button').forEach((link) => {
+        link.addEventListener('mouseenter', () => {
+          if (restoreTimeout) clearTimeout(restoreTimeout);
+          gsap.to(flair, { scale: 0.0001, duration: 0.5, ease: 'power2.out' });
+        });
+        link.addEventListener('mouseleave', () => {
+          restoreTimeout = setTimeout(() => {
+            gsap.to(flair, { scale: 1, duration: 0.5, ease: 'power2.out' });
+          }, 200);
+        });
+      });
+    }
+  }
+</script>

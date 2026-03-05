@@ -24,3 +24,7 @@
   --swiper-navigation-color: var(--color-primary-950);
   --swiper-pagination-bullet-inactive-color: var(--color-primary-500);
 }
+
+#cursor-flair {
+    @apply fixed top-0 left-0 w-20 h-20 pointer-events-none z-9999 opacity-0 will-change-transform -translate-[50%];
+}
